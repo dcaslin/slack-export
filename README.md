@@ -56,11 +56,11 @@ All parameters for this tool are set via Environmental variables. See `sample.en
 - `npm start`
 
 ### Docker
+
+This is hosted on docker hub at https://hub.docker.com/repository/docker/dcaslin/slack-export
+
 - Update the reference `docker-compose.yaml` file to, at a minimum, set your `SLACK_API_TOKEN` and make sure the export bind mount exists with proper permissions
 - Run `docker-compose up`. This will run then CLI tool in a container that will immediately shut down on success
-
-
-
 
 ## Creating your App and Obtaining a Token
 
