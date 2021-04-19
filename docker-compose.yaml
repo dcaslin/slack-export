@@ -1,0 +1,14 @@
+volumes:
+    persistent-home:
+services:
+    slack-export:
+        image: "dcaslin/slack-export"
+        container_name: slack-export
+        environment:
+          - SLACK_API_TOKEN=[your api token]
+          - EXPORT_ROOT=/opt/slack-export
+          - EXPORT_JSON=false
+          - EXPORT_FILES=false
+        volumes:
+            - './slack-export:/opt/slack-export'
+            - persistent-home:/home/node/
