@@ -1,6 +1,16 @@
 # Slack Export
 
-[TOC]
+- [Slack Export](#slack-export)
+  - [Summary](#summary)
+  - [Use case](#use-case)
+  - [Parameters](#parameters)
+  - [Running the application](#running-the-application)
+    - [Command line](#command-line)
+    - [Docker](#docker)
+  - [Creating your App and Obtaining a Token](#creating-your-app-and-obtaining-a-token)
+  - [Developing](#developing)
+
+
 
 ## Summary
 
