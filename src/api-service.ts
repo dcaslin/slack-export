@@ -98,7 +98,13 @@ export class APIService {
             await fsPromises.mkdir(convTargetFolder);
 
         }
+        if (!file.name) {
+            // likely a tombstone deleted file
+            console.log(chalk.red(`           Skipping file ${JSON.stringify(file)}`));            
+            return;
+        }
         const target = path.join(convTargetFolder, `${file.id}-${file.name}`);
+        console.log(chalk.blue(`           Downloading ${target}`));
         const resp = await this.axios.get(file.url_private, { responseType: 'arraybuffer' });
         await fsPromises.writeFile(target, resp.data);
         console.log(chalk.blue(`           Downloaded ${target}`));
