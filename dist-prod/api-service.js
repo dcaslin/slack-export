@@ -109,7 +109,13 @@ class APIService {
             catch (x) {
                 yield fs_1.promises.mkdir(convTargetFolder);
             }
+            if (!file.name) {
+                // likely a tombstone deleted file
+                console.log(chalk_1.default.red(`           Skipping file ${JSON.stringify(file)}`));
+                return;
+            }
             const target = path_1.default.join(convTargetFolder, `${file.id}-${file.name}`);
+            console.log(chalk_1.default.blue(`           Downloading ${target}`));
             const resp = yield this.axios.get(file.url_private, { responseType: 'arraybuffer' });
             yield fs_1.promises.writeFile(target, resp.data);
             console.log(chalk_1.default.blue(`           Downloaded ${target}`));
