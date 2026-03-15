@@ -49,7 +49,7 @@ All parameters for this tool are set via Environmental variables. See `sample.en
 ## Running the application
 
 ### Command line
-- Install [Go](https://go.dev/dl/) (1.21+)
+- Install [Go](https://go.dev/dl/) (1.26+)
 - Clone this repo
 - `make build`
 - Set your environmental variables or a proper .env file at the root (see `sample.env`)
