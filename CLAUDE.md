@@ -7,16 +7,13 @@ Slack Export is a Go utility that exports Slack workspace chat history into text
 ## Build & Run
 
 ```bash
-go build -o slack-export .   # Build binary
-./slack-export               # Run (requires .env or env vars)
-docker-compose up            # Run via Docker
-```
-
-## Test / Lint
-
-```bash
-go test ./...             # Run tests
-go vet ./...              # Static analysis
+make build               # Build binary
+make test                # Run tests
+make vet                 # Static analysis
+make clean               # Remove binary
+make docker              # Build Docker image
+./slack-export           # Run (requires .env or env vars)
+docker-compose up        # Run via Docker
 ```
 
 ## Configuration
