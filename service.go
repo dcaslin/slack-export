@@ -15,19 +15,6 @@ import (
 	"github.com/slack-go/slack"
 )
 
-var requiredScopes = []string{
-	"channels:history",
-	"channels:read",
-	"groups:history",
-	"groups:read",
-	"im:history",
-	"im:read",
-	"mpim:history",
-	"mpim:read",
-	"files:read",
-	"users:read",
-}
-
 var sanitizeRe = regexp.MustCompile(`[<>:"/\\|?*\x00-\x1f]`)
 
 func sanitizeFilename(name string) string {
@@ -310,7 +297,9 @@ func (s *APIService) buildSimpleMsg(msg slack.Message) SimpleMsg {
 
 func parseSlackTs(ts string) time.Time {
 	var sec, usec int64
-	fmt.Sscanf(ts, "%d.%d", &sec, &usec)
+	if _, err := fmt.Sscanf(ts, "%d.%d", &sec, &usec); err != nil {
+		fmt.Printf("Warning: unable to parse timestamp %q: %v\n", ts, err)
+	}
 	return time.Unix(sec, usec*1000)
 }
 
