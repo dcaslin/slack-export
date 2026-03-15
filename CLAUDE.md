@@ -12,13 +12,12 @@ go build -o slack-export .   # Build binary
 docker-compose up            # Run via Docker
 ```
 
-## Lint / Vet
+## Test / Lint
 
 ```bash
-go vet ./...
+go test ./...             # Run tests
+go vet ./...              # Static analysis
 ```
-
-There are no automated tests.
 
 ## Configuration
 
