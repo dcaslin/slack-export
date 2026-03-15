@@ -49,11 +49,11 @@ All parameters for this tool are set via Environmental variables. See `sample.en
 ## Running the application
 
 ### Command line
-- Install node.js (this was developed and tested with Node 14 LTS, but it's probably not very sensitive)
+- Install [Go](https://go.dev/dl/) (1.26+)
 - Clone this repo
-- `npm install`
+- `make build`
 - Set your environmental variables or a proper .env file at the root (see `sample.env`)
-- `npm start`
+- `./slack-export`
 
 ### Docker
 
@@ -93,9 +93,8 @@ To use this application, you'll need a token. There are a lot of tools out there
 
 ## Developing
 
-This is built in Node and Typescript.
+This is built in Go.
 
-- clone this repo
-- Run `npm install`
+- Clone this repo
 - Create a .env file with, at minimum `SLACK_API_TOKEN=[your api token]`
-- Run `npm run start:dev`
+- `make build` to compile, `make test` to run tests, `make vet` for static analysis

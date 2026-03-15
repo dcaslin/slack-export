@@ -1,8 +1,8 @@
 volumes:
-    persistent-home:
+    persistent-config:
 services:
     slack-export:
-        image: "dcaslin/slack-export"
+        build: .
         container_name: slack-export
         environment:
           - SLACK_API_TOKEN=[your api token]
@@ -11,4 +11,4 @@ services:
           - EXPORT_FILES=false
         volumes:
             - './slack-export:/opt/slack-export'
-            - persistent-home:/home/node/
+            - persistent-config:/home/appuser/.config/

@@ -2,25 +2,19 @@
 
 ## Project Overview
 
-Slack Export is a TypeScript/Node.js utility that exports Slack workspace chat history into text files (optionally JSON and file attachments). It maintains state between runs so subsequent exports only retrieve new messages.
+Slack Export is a Go utility that exports Slack workspace chat history into text files (optionally JSON and file attachments). It maintains state between runs so subsequent exports only retrieve new messages.
 
 ## Build & Run
 
 ```bash
-npm run build        # Compile TypeScript to ./build
-npm run prod         # Compile TypeScript to ./dist-prod (production)
-npm run start:dev    # Dev mode with hot reload (nodemon + ts-node)
-npm start            # Run production build
-docker-compose up    # Run via Docker
+make build               # Build binary
+make test                # Run tests
+make vet                 # Static analysis
+make clean               # Remove binary
+make docker              # Build Docker image
+./slack-export           # Run (requires .env or env vars)
+docker-compose up        # Run via Docker
 ```
-
-## Lint
-
-```bash
-npm run lint         # ESLint on TypeScript files
-```
-
-There are no automated tests.
 
 ## Configuration
 
@@ -29,17 +23,17 @@ Set environment variables in a `.env` file (see `sample.env`):
 - `EXPORT_ROOT` (required) - target output folder
 - `EXPORT_JSON` - also export raw JSON payloads
 - `EXPORT_FILES` - download file attachments
-- `MIN_DATE_ISO` / `MAX_DATE_ISO` - date range filters
+- `MIN_DATE_ISO` / `MAX_DATE_ISO` - date range filters (RFC3339 or YYYY-MM-DD)
 - `RESET_CONF` - clear persisted state to force full re-export
 
 ## Project Structure
 
-- `src/index.ts` - Entry point, config loading, initialization
-- `src/api-service.ts` - Core `APIService` class for all Slack API interactions
-- `src/model.ts` - TypeScript interfaces (User, Conversation, SlackMessage, etc.)
-- `dist-prod/` - Checked-in production build output
+- `main.go` - Entry point, env var loading, validation
+- `service.go` - `APIService` struct with all Slack API and export logic
+- `model.go` - Data structs (`SimpleMsg`)
+- `state.go` - JSON file-based state persistence (cross-platform via `os.UserConfigDir()`)
 
-## Code Style
+## Dependencies
 
-- 4-space indentation, single quotes, semicolons required
-- ESLint + Prettier enforced
+- `github.com/slack-go/slack` - Slack API client
+- `github.com/joho/godotenv` - .env file loading

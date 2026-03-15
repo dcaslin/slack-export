@@ -1,2 +1,8 @@
-node_modules
-build
+.env
+.git
+.gitignore
+.context/
+slack-export/
+*.md
+LICENSE
+sample.env
