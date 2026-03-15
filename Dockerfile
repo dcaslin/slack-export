@@ -1,11 +1,13 @@
-FROM node:alpine
-# Create app directory
-WORKDIR /usr/src/app
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package*.json ./
-RUN npm install --prod
-COPY dist-prod .
-# We're downgrading below root, so make sure any out folders are properly writable
-USER node
-CMD [ "node", "index.js" ]
+FROM golang:1.23-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY *.go ./
+RUN CGO_ENABLED=0 go build -o slack-export .
+
+FROM alpine:latest
+RUN adduser -D appuser
+WORKDIR /app
+COPY --from=builder /app/slack-export .
+USER appuser
+ENTRYPOINT ["./slack-export"]

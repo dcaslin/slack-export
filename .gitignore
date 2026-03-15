@@ -5,17 +5,12 @@ slack-export/
 logs
 *.log
 
-# Dependency directories
-node_modules/
-
-# Optional eslint cache
-.eslintcache
-
 # local env settings
 .env
 
-# build folder
-build
+# Go binary
+slack-export
+*.exe
 
 # System Files
 .DS_Store
@@ -29,7 +24,6 @@ Thumbs.db
 !.vscode/extensions.json
 .history/*
 
-
 # IDEs and editors
 /.idea
 .project
@@ -38,3 +32,6 @@ Thumbs.db
 *.launch
 .settings/
 *.sublime-workspace
+
+# Conductor
+.context/
